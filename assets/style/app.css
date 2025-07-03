@@ -1,0 +1,854 @@
+/* General Styling & Base Setup */
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(to bottom right, #e8eff6, #f8fbfd); /* Soft gradient background */
+  color: #343a40; /* Darker text for readability on light background */
+  line-height: 1.6; /* Slightly reduced line height for better density */
+  overflow-x: hidden; /* Prevent horizontal scroll */
+  scroll-behavior: smooth; /* Smooth scroll for all anchors - important for this effect */
+  padding-top: 0;
+}
+
+/* Base container padding */
+.container {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+/* Navbar Styling */
+.main-navbar {
+  background-color: #ffffff; /* Solid white background */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.07); /* Elegant, soft shadow */
+  padding: 0.9rem 0;
+  transition: all 0.4s ease-in-out;
+  z-index: 1050; /* Ensure navbar is always on top */
+  border-bottom: 1px solid rgba(220, 220, 220, 0.7);
+}
+
+.main-navbar.scrolled {
+  padding: 0.7rem 0;
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.1); /* Slightly more prominent */
+}
+
+.site-logo {
+  font-weight: 800;
+  color: #6a82fb !important; /* Primary accent color */
+  font-size: 2.1rem;
+  transition: color 0.3s ease;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.site-logo:hover {
+  color: #fc5c7d !important; /* Secondary accent on hover */
+}
+
+.main-nav-links .nav-link {
+  color: #6c757d !important; /* Muted grey for links */
+  font-weight: 500;
+  margin: 0 1.1rem; /* More spacing */
+  transition: color 0.3s ease, transform 0.2s ease, text-shadow 0.3s ease;
+  position: relative;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  font-size: 1rem;
+  padding: 0.4rem 0;
+}
+
+.main-nav-links .nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(to right, #6a82fb, #fc5c7d); /* Gradient underline */
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.main-nav-links .nav-link:hover {
+  color: #fc5c7d !important;
+  transform: translateY(-3px);
+  text-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.main-nav-links .nav-link.active {
+  color: #6a82fb !important;
+  font-weight: 600;
+  text-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+}
+
+.main-nav-links .nav-link.active::after {
+  transform: scaleX(1);
+  background: linear-gradient(to right, #6a82fb, #fc5c7d); /* Active link gets gradient underline */
+}
+
+/* Main Content Wrapper for Mobile Fade Effect */
+#main-content-wrapper {
+  transition: opacity 0.4s ease, transform 0.4s ease, filter 0.4s ease;
+}
+#main-content-wrapper.faded-out {
+  opacity: 0.2;
+  transform: scale(0.92) translateY(15px);
+  filter: blur(3px);
+  pointer-events: none;
+}
+#main-content-wrapper.faded-in {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+  filter: blur(0);
+  pointer-events: auto;
+}
+body.navbar-open {
+  overflow: hidden; /* Prevent scrolling when mobile nav is open */
+}
+
+/* Section Common Styles for Full-Page View */
+section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Vertically center content */
+  align-items: center; /* Horizontally center content */
+  position: relative;
+  min-height: 100vh; /* Make sure each section takes at least 100% of viewport height */
+  box-sizing: border-box; /* Include padding in height calculation */
+  padding-left: 1.5rem; /* Responsive padding */
+  padding-right: 1.5rem; /* Responsive padding */
+  padding-top: calc(80px + 2rem); /* Base padding for fixed navbar */
+  padding-bottom: 2rem; /* Consistent bottom padding */
+  text-align: center; /* Default text alignment for centered content */
+}
+
+/* Offset for fixed navbar */
+#home {
+  padding-top: calc(80px + 2rem); /* Keep a bit more padding at the very top for hero */
+}
+
+/* Specific Section Adjustments for "One Screen" View - if content is very long, it will still scroll */
+/* These values are trial-and-error based on your content length and might need fine-tuning. */
+/* If a section's content naturally exceeds 100vh even with minimal padding, it will scroll. */
+#biografi,
+#pendidikan,
+#hobi,
+#achievement,
+#contact {
+  /* Set specific padding if needed, otherwise default `section` padding applies */
+  padding-top: calc(80px + 2rem);
+  padding-bottom: 2rem;
+}
+/* Achievement section often has more content (multiple cards), so it might be the first to require scrolling if content is too much */
+#achievement {
+  padding-top: calc(80px + 2rem);
+  padding-bottom: 2rem;
+}
+
+.section-title {
+  font-weight: 700;
+  color: #212529;
+  margin-bottom: 2.5rem;
+  position: relative;
+  display: block;
+  padding-bottom: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 2.6rem;
+  text-align: center;
+  width: 100%;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: 90px;
+  height: 5px;
+  background: linear-gradient(to right, #6a82fb, #fc5c7d);
+  border-radius: 3px;
+  transition: width 0.4s ease, transform 0.4s ease;
+}
+
+.section-title:hover::after {
+  width: 120px;
+  transform: translateX(-50%) scaleX(1.1);
+}
+
+/* Section-specific backgrounds and shadows */
+.hero-section {
+  background: linear-gradient(135deg, #f0f2f5 0%, #e9edf2 100%);
+  box-shadow: inset 0 -5px 15px rgba(0, 0, 0, 0.03);
+  overflow: hidden;
+}
+
+.about-section {
+  background-color: #ffffff;
+  box-shadow: inset 0 5px 15px rgba(0, 0, 0, 0.03);
+}
+
+.education-section {
+  background-color: #e8eff6;
+}
+
+.hobbies-section {
+  background-color: #ffffff;
+  box-shadow: inset 0 -5px 15px rgba(0, 0, 0, 0.03);
+}
+
+.achievement-section {
+  background: linear-gradient(to bottom right, #f8fbfd, #e8eff6);
+}
+
+.contact-section {
+  background-color: #e8eff6;
+  border-top: 1px solid #d1d9e6;
+}
+
+/* Hero Section Specifics */
+.hero-section .container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  text-align: center;
+}
+
+.profile-card {
+  background-color: #ffffff;
+  padding: 4rem 4rem;
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+  max-width: 700px;
+  border: 1px solid #f0f2f5;
+  margin: auto;
+  position: relative;
+  z-index: 1;
+  transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.5s ease;
+  opacity: 0;
+  transform: translateY(50px) scale(0.95);
+}
+.profile-card.fade-in-initial {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+.profile-card:hover {
+  transform: translateY(-12px);
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.15);
+}
+
+.profile-image {
+  width: 200px;
+  height: 200px;
+  border: 8px solid;
+  border-image: linear-gradient(45deg, #6a82fb, #fc5c7d) 1;
+  padding: 5px;
+  margin-bottom: 2.5rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.4s ease;
+  opacity: 0;
+  transform: scale(0.8) translateY(20px);
+}
+.profile-image.fade-in-initial {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+.profile-image:hover {
+  transform: scale(1.08);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
+}
+
+.profile-name,
+.profile-title,
+.profile-university {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: transform 0.8s ease-out, opacity 0.8s ease-out;
+}
+.profile-name.fade-in-initial,
+.profile-title.fade-in-initial,
+.profile-university.fade-in-initial {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ADJUSTED FONT SIZES FOR HOME SECTION (DEFAULT - DESKTOP LARGE) */
+.profile-name {
+  font-size: 3rem;
+  font-weight: 800;
+  margin-bottom: 0.8rem;
+  color: #212529;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
+}
+.profile-title {
+  font-size: 1.7rem;
+  margin-bottom: 1rem;
+  color: #495057;
+  font-weight: 600;
+}
+.profile-university {
+  font-size: 1.2rem;
+  color: #868e96;
+}
+/* END ADJUSTED FONT SIZES */
+
+/* About Section Specifics */
+.about-content {
+  background-color: #fcfdfe;
+  padding: 3.8rem;
+  border-radius: 18px;
+  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.08);
+  margin-top: 3.5rem;
+  line-height: 1.8;
+  text-align: justify;
+  border: 1px solid #e0e6ec;
+}
+
+.about-paragraph {
+  font-size: 1.05rem;
+  margin-bottom: 1.8rem;
+  color: #555;
+  text-align: justify;
+}
+.section-divider {
+  width: 60%;
+  margin: 2rem auto;
+  border-top: 2px solid #e0e6ec;
+}
+
+/* Education Section Specifics */
+.education-item {
+  background-color: #ffffff;
+  padding: 3rem;
+  border-radius: 18px;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.07);
+  margin-bottom: 3rem;
+  transition: transform 0.4s ease, box-shadow 0.4s ease, border-left 0.4s ease;
+  border-left: 8px solid;
+  border-image: linear-gradient(to bottom, #6a82fb, #fc5c7d) 1;
+  text-align: center;
+}
+.education-item:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.1);
+  border-image: linear-gradient(to bottom, #fc5c7d, #6a82fb) 1;
+}
+
+.education-year {
+  font-size: 1.3rem;
+  margin-bottom: 1.5rem;
+  color: #6c757d;
+  font-weight: 600;
+}
+.education-button {
+  padding: 1rem 2.5rem;
+  border-radius: 30px;
+  font-size: 1.1rem;
+  background: linear-gradient(45deg, #6a82fb, #fc5c7d);
+  border: none;
+  color: white;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
+  box-shadow: 0 5px 15px rgba(106, 130, 251, 0.4);
+}
+.education-button:hover {
+  background-color: #fc5c7d;
+  border-color: #fc5c7d;
+  transform: scale(1.08);
+  box-shadow: 0 8px 20px rgba(252, 92, 125, 0.5);
+  opacity: 0.9;
+}
+
+/* Modal Styling */
+.modal-content {
+  border-radius: 18px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+  border: none;
+  background-color: #ffffff;
+  color: #343a40;
+}
+.modal-header {
+  padding: 1.8rem 2.2rem;
+  border-bottom: 1px solid #e0e6ec;
+  background-color: #f8fbfd;
+  border-top-left-radius: 18px;
+  border-top-right-radius: 18px;
+}
+.modal-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #212529;
+}
+.modal-body {
+  padding: 2.5rem;
+}
+.modal-body-text {
+  font-size: 1.05rem;
+  line-height: 1.9;
+  color: #555;
+  text-align: justify;
+}
+.modal-footer {
+  padding: 1.5rem 2.2rem;
+  border-top: 1px solid #e0e6ec;
+  background-color: #f8fbfd;
+  border-bottom-left-radius: 18px;
+  border-bottom-right-radius: 18px;
+}
+.modal-footer .btn {
+  padding: 0.8rem 2rem;
+  border-radius: 30px;
+  font-size: 1rem;
+  background-color: #a0a0a0;
+  border-color: #a0a0a0;
+  color: white;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+.modal-footer .btn:hover {
+  background-color: #888;
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Hobbies Section Specifics */
+.hobbies-content {
+  background-color: #fcfdfe;
+  padding: 3.8rem;
+  border-radius: 18px;
+  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.08);
+  margin-top: 3.5rem;
+  border: 1px solid #e0e6ec;
+}
+.hobbies-list {
+  margin-top: 2.5rem;
+  text-align: left;
+  padding-left: 0;
+  list-style: none;
+}
+.hobbies-list-item {
+  font-size: 1.05rem;
+  line-height: 2;
+  padding-left: 2.5rem;
+  padding-bottom: 0.8rem;
+  margin-bottom: 0.8rem;
+  color: #555;
+  position: relative;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+.hobbies-list-item::before {
+  content: '\f00c';
+  font-family: 'Font Awesome 6 Free';
+  font-weight: 900;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #28a745;
+  font-size: 1.2rem;
+  text-shadow: 0 0 5px rgba(40, 167, 69, 0.2);
+}
+.hobbies-list-item:hover {
+  transform: translateX(10px);
+  color: #6a82fb;
+}
+
+/* Achievement Section Specifics */
+.achievement-cards-row {
+  margin-top: 4rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+}
+
+.achievement-col {
+  display: flex;
+  align-items: stretch;
+}
+
+@media (min-width: 576px) {
+  .achievement-col {
+    width: calc(33.333% - 1.333rem);
+  }
+}
+
+.achievement-card {
+  border-radius: 18px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.4s ease;
+  border: 1px solid #e0e6ec;
+  overflow: hidden;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.achievement-card:hover {
+  transform: translateY(-15px);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
+}
+
+.achievement-card-img {
+  height: 240px;
+  width: 100%;
+  object-fit: cover;
+  border-bottom: 5px solid;
+  border-image: linear-gradient(to right, #6a82fb, #fc5c7d) 1;
+  transition: border-image 0.3s ease;
+}
+.achievement-card:hover .achievement-card-img {
+  border-image: linear-gradient(to right, #fc5c7d, #6a82fb) 1;
+}
+
+.achievement-card .card-body {
+  padding: 2.2rem;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.achievement-card-text {
+  font-size: 1.05rem;
+  color: #555;
+  font-weight: 500;
+  text-align: justify;
+}
+
+/* Contact Section Specifics */
+.contact-icons {
+  margin-top: 3.5rem;
+  margin-bottom: 3rem;
+}
+.contact-link {
+  font-size: 3.5rem;
+  margin: 0 1.8rem;
+  background: linear-gradient(45deg, #6a82fb, #fc5c7d);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+  transition: transform 0.3s ease, filter 0.3s ease;
+  filter: drop-shadow(0 3px 8px rgba(106, 130, 251, 0.3));
+}
+.contact-link:hover {
+  transform: scale(1.2) rotate(5deg);
+  filter: drop-shadow(0 5px 12px rgba(252, 92, 125, 0.5));
+}
+.watermark-text {
+  font-size: 1rem;
+  margin-top: 3rem;
+  color: #868e96;
+}
+
+/* Scroll to top button */
+#scrollTopBtn {
+  position: fixed;
+  bottom: 35px;
+  right: 35px;
+  padding: 16px 20px;
+  font-size: 1.7rem;
+  background: linear-gradient(45deg, #6a82fb, #fc5c7d);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  box-shadow: 0 8px 20px rgba(106, 130, 251, 0.4);
+  cursor: pointer;
+  display: none;
+  transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  z-index: 1000;
+}
+#scrollTopBtn:hover {
+  transform: translateY(-8px) scale(1.1);
+  box-shadow: 0 10px 25px rgba(252, 92, 125, 0.5);
+}
+
+/* Animation on Scroll (fade-on-scroll) */
+.fade-on-scroll {
+  opacity: 0;
+  transform: translateY(80px);
+  transition: opacity 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.fade-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* --- MEDIA QUERIES FOR RESPONSIVENESS --- */
+
+/* For smaller desktop screens or large tablets (under 992px) */
+@media (max-width: 991.98px) {
+  .navbar-collapse.show {
+    background-color: #ffffff;
+    border-bottom: 1px solid #e0e6ec;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  }
+  .navbar-toggler {
+    border-color: rgba(106, 130, 251, 0.4);
+  }
+  .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28106, 130, 251, 0.8%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+  }
+  .navbar-toggler:focus {
+    box-shadow: 0 0 0 0.25rem rgba(106, 130, 251, 0.5);
+  }
+
+  .navbar-collapse.show .main-nav-links .nav-item {
+    margin-bottom: 1.8rem;
+  }
+  .navbar-collapse.show .main-nav-links .nav-link {
+    font-size: 2rem;
+    padding: 1rem 0;
+  }
+
+  .section-title {
+    font-size: 2.2rem;
+  }
+  .hero-section {
+    min-height: 85vh;
+    padding-top: calc(80px + 4rem);
+  }
+  /* ADJUSTED FONT SIZES FOR HOME SECTION ON TABLET (LANDSCAPE) */
+  .profile-name {
+    font-size: 2.8rem;
+  }
+  .profile-title {
+    font-size: 1.6rem;
+  }
+  .profile-university {
+    font-size: 1.1rem;
+  }
+  /* END ADJUSTED FONT SIZES */
+
+  /* Adjust padding-top/bottom for all sections on smaller screens */
+  section {
+    padding-top: calc(80px + 1.5rem); /* Reduce padding to gain vertical space */
+    padding-bottom: 1.5rem; /* Reduce bottom padding to fit more content */
+    min-height: 100vh; /* Keep 100vh to ensure full screen attempt */
+  }
+  /* Exception: If content pushes height past 100vh, it will scroll */
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (max-width: 767.98px) {
+  .profile-card {
+    padding: 3rem 3rem;
+  }
+  .profile-image {
+    width: 180px;
+    height: 180px;
+    margin-bottom: 2rem;
+  }
+  /* ADJUSTED FONT SIZES FOR HOME SECTION ON TABLET (PORTRAIT) */
+  .profile-name {
+    font-size: 2.2rem;
+  }
+  .profile-title {
+    font-size: 1.3rem;
+  }
+  .profile-university {
+    font-size: 0.95rem;
+  }
+  /* END ADJUSTED FONT SIZES */
+
+  .section-title {
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+  }
+  .about-content,
+  .education-item,
+  .hobbies-content,
+  .achievement-card {
+    padding: 2rem;
+    margin-top: 2rem;
+  }
+  .about-paragraph,
+  .modal-body-text,
+  .hobbies-list-item,
+  .achievement-card-text {
+    font-size: 0.95rem;
+    line-height: 1.7;
+  }
+  .education-year {
+    font-size: 1.2rem;
+  }
+  .contact-link {
+    font-size: 3rem;
+    margin: 0 1.5rem;
+  }
+  .achievement-card-img {
+    height: 200px;
+  }
+
+  .achievement-cards-row {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
+  .achievement-col {
+    width: 90% !important;
+    max-width: 400px;
+    margin-bottom: 0;
+  }
+  .hobbies-list-item {
+    padding-left: 2rem;
+  }
+  .hobbies-list-item::before {
+    font-size: 1.1rem;
+  }
+
+  /* Adjust min-height and padding for sections for one-screen view on mobile */
+  section {
+    padding-top: calc(80px + 1rem); /* Even less padding top */
+    padding-bottom: 1rem; /* Even less padding bottom */
+    min-height: 100vh; /* Still try for 100vh */
+  }
+}
+
+/* Extra small devices (portrait phones, less than 576px) */
+@media (max-width: 575.98px) {
+  .hero-section {
+    padding-top: calc(80px + 2rem);
+    min-height: 80vh;
+  }
+  /* ADJUSTED FONT SIZES FOR HOME SECTION ON SMALL PHONE */
+  .profile-name {
+    font-size: 1.6rem;
+  }
+  .profile-title {
+    font-size: 0.9rem;
+  }
+  .profile-university {
+    font-size: 0.75rem;
+  }
+  /* END ADJUSTED FONT SIZES */
+  .section-title {
+    font-size: 1.5rem;
+    letter-spacing: 0.5px;
+    margin-bottom: 1.5rem;
+  }
+  .section-title::after {
+    width: 60px;
+    height: 4px;
+  }
+
+  .profile-card {
+    padding: 1.5rem 1rem;
+  }
+  .profile-image {
+    width: 120px;
+    height: 120px;
+    border-width: 5px;
+    margin-bottom: 1.5rem;
+  }
+
+  .about-content,
+  .education-item,
+  .hobbies-content,
+  .achievement-card {
+    padding: 1.5rem;
+    margin-top: 1.5rem;
+  }
+  .about-paragraph,
+  .modal-body-text,
+  .hobbies-list-item,
+  .achievement-card-text {
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+  .education-year {
+    font-size: 1rem;
+  }
+  .education-button {
+    padding: 0.7rem 1.5rem;
+    font-size: 0.9rem;
+  }
+  .modal-title {
+    font-size: 1.3rem;
+  }
+  .modal-body {
+    padding: 1.2rem;
+  }
+  .modal-footer .btn {
+    padding: 0.5rem 1.2rem;
+    font-size: 0.8rem;
+  }
+
+  .hobbies-list-item {
+    font-size: 0.95rem;
+    padding-left: 2rem;
+    line-height: 1.8;
+  }
+  .hobbies-list-item::before {
+    font-size: 1rem;
+  }
+
+  .achievement-cards-row {
+    gap: 1.5rem;
+  }
+  .achievement-col {
+    width: 95% !important;
+  }
+  .achievement-card-img {
+    height: 160px;
+  }
+  .achievement-card .card-body {
+    padding: 1.2rem;
+  }
+
+  .contact-icons {
+    margin-top: 2.5rem;
+    margin-bottom: 2.5rem;
+  }
+  .contact-link {
+    font-size: 2rem;
+    margin: 0 0.6rem;
+  }
+  .watermark-text {
+    font-size: 0.8rem;
+    margin-top: 1.5rem;
+  }
+  #scrollTopBtn {
+    padding: 10px 14px;
+    font-size: 1rem;
+    bottom: 15px;
+    right: 15px;
+  }
+}
+
+/* Max width 375px (iPhone SE, etc.) */
+@media (max-width: 375px) {
+  /* ADJUSTED FONT SIZES FOR HOME SECTION ON VERY SMALL PHONE */
+  .profile-name {
+    font-size: 1.4rem;
+  }
+  .profile-title {
+    font-size: 0.8rem;
+  }
+  .profile-university {
+    font-size: 0.7rem;
+  }
+  /* END ADJUSTED FONT SIZES */
+  .section-title {
+    font-size: 1.4rem;
+  }
+  .about-content,
+  .education-item,
+  .hobbies-content,
+  .achievement-card {
+    padding: 1rem;
+  }
+  .about-paragraph,
+  .modal-body-text,
+  .hobbies-list-item,
+  .achievement-card-text {
+    font-size: 0.85rem;
+    line-height: 1.5;
+  }
+  .education-button {
+    font-size: 0.85rem;
+    padding: 0.6rem 1.2rem;
+  }
+  .contact-link {
+    font-size: 1.8rem;
+    margin: 0 0.5rem;
+  }
+}
